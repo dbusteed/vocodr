@@ -81,7 +81,7 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 
 		delay_out = delay.Read();
 		sig_out = sig + delay_out;
-		feedback = (delay_out * 0.1f) + sig;
+		feedback = (delay_out * 0.01f) + sig;
 		delay.Write(feedback);
 
 		low_pass.Process(sig_out);
@@ -113,9 +113,9 @@ int main(void)
 	harm.SetFirstHarmIdx(1);
 	
 	low_pass.Init(sample_rate);
-	low_pass.SetFreq(800.0);
+	low_pass.SetFreq(1060.0);
 
-    delay.SetDelay(sample_rate * 0.1f);
+    delay.SetDelay(sample_rate * 0.01f);
 
 	hw.StartAudio(AudioCallback);
 	while(1) {}
